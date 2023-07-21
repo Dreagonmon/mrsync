@@ -1,0 +1,85 @@
+#hjson
+{
+    global: {
+        # global flags that apply to all entries
+        flags: [
+            a
+            u
+            z
+            v
+            safe-links
+        ]
+        # exclude patterns that apply to all entries
+        exclude: [
+            **/.venv/
+            **/__pycache__/
+            **/node_modules/
+            **/.DS_Store/
+        ]
+        # include patterns that apply to all entries
+        include: []
+    }
+    entries: {
+        # entry name: scripts
+        scripts: {
+            locations: {
+                # location name: local
+                local: {
+                    path: /home/dreagonmon/scripts/
+                }
+                # location name: ssh_local
+                ssh_local: {
+                    path: dreagonmon@192.168.31.102:/mnt/data/Backups/scripts/
+                    options: ssh -4 -p 8022
+                }
+            }
+            exclude: [
+                **/build/
+                **/.build/
+                **/dist/
+                **/dist_*/
+                **/dist-*/
+                **/output/
+                **/tmp/
+                **/Downloads/
+                **/esp-idf/*
+                **/MRS_Toolchain_Linux_x64_V1.60/*
+                **/39gii/gcc-arm-none-eabi-10.3-2021.10/*
+            ]
+            include: []
+            # flags that apply to all modes
+            flags: [
+                delete
+                # 'dry-run' prevent default mode to be used.
+                dry-run
+            ]
+            # mode name: backup
+            flags_backup: [
+                # flags that add to this mode
+                delete-excluded
+                -dry-run
+            ]
+            # mode name: restore
+            flags_restore: [
+                # flags that remove to this mode
+                -delete-excluded
+                -dry-run
+            ]
+        }
+        demo: {
+            locations: {
+                loc1: {
+                    path: "/path/to/loc1/"
+                }
+                loc2: {
+                    path: "/path/to/loc2/"
+                }
+            }
+        }
+    }
+}
+
+/*
+recommand editor: https://vscode.dev/
+and vscode plugin: laktak.hjson
+*/
